@@ -1,0 +1,26 @@
+<% include partials/header %>
+    <div class="ui main segment container text">
+        <div class="ui huge header"><%= dblog.title%></div>
+        <div class="ui to attached ">
+            <div class="item">
+                <img class="ui centered rounded image" src='<%=dblog.image%>'>
+                <div class="content">
+                    <span><%=dblog.created.toDateString()%></span>
+                </div>
+                <div class="description">
+                    <p>
+                        <%= dblog.body%>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    
+    
+   
+
+
+<% include partials/footer %>

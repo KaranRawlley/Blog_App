@@ -37,6 +37,24 @@ app.get('/blogs',function(req,res){
     
 });
 
+// NEW route 
+app.get('/blogs/new',function(req,res){
+    res.render('new')
+});
+
+// Create Route
+app.post('/blogs',function(req,res){
+    //create blog
+    
+    Blog.create(req.body.blog,function(err,newBlog){
+        if(err)
+            console.log('Error');
+        else
+            res.redirect('/blogs');    
+    });
+
+});
+
 app.listen(3000,function(){
     console.log('Server Started')
 });

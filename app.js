@@ -59,7 +59,7 @@ app.post('/blogs',function(req,res){
 
 //Show route
 app.get('/blogs/:id',function(req,res){
-    Blog.findById(req.params.id,function(err,blog){
+    Blog.findOne({_id:req.params.id},function(err,blog){
         if(err)
             console.log('error');
         else
@@ -69,9 +69,9 @@ app.get('/blogs/:id',function(req,res){
 
 // EDIT ROUTE
 app.get('/blogs/:id/edit',function(req,res){
-    Blog.findById(req.params.id,function(err,blog){
+    Blog.findOne({_id:req.params.id},function(err,blog){
         if(err)
-            res.render('/blogs')
+            res.redirect('/blogs');
         else
             res.render('edit',{blog:blog});   
     });
@@ -79,12 +79,22 @@ app.get('/blogs/:id/edit',function(req,res){
 
 //UPDATE ROUTE
 app.put('/blogs/:id',function(req,res){
-    Blog.findByIdAndUpdate(req.params.id,req.body.blog,function(err,updatedBlog){
+    Blog.findOneAndUpdate(req.params.id,req.body.blog,function(err,updatedBlog){
         if(err)
             res.redirect('/blogs');
         else
             res.redirect('/blogs/'+ req.params.id);    
     });
+});
+//DESTROY ROUTE
+app.delete('/blogs/:id',function(req,res){
+    Blog.findOneAndRemove(req.params.id,function(err){
+            if(err)
+                res.redirect('/blogs');
+            else
+                res.redirect('/blogs');
+        
+    })
 });
 
 
